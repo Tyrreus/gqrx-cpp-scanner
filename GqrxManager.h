@@ -45,10 +45,10 @@ public:
     /**
      * Set specific frequency.
      *
-     * @param aFreq frequency.
+     * @param aFreq frequency in HZ.
      * @throws GqrxManagerException if error.
      */
-    void SetFrequency(freq_t aFreq) const;
+    void SetFrequency(freq_t aFreqHz) const;
 
     /**
      * Get current frequency.
