@@ -5,12 +5,9 @@
 #include "Connector.h"
 
 #include <arpa/inet.h>
-#include <cstring>
-#include <netdb.h>
 #include <sys/socket.h>
 #include <unistd.h>
 #include <utility>
-#include <iostream>
 
 #include "ConnectorException.h"
 

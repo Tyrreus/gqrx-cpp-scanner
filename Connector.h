@@ -7,12 +7,11 @@
 
 #include <string>
 
+/**
+ * Class is used as connector to GQRX remote API.
+ */
 class Connector {
 public:
-    enum class ConnectorStatus_t {
-        kStatusOk,
-        kStatusError
-    };
 
     /**
      * Delete no-arg constructor.
