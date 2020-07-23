@@ -5,6 +5,7 @@
 #include "Connector.h"
 
 #include <arpa/inet.h>
+#include <cstring>
 #include <sys/socket.h>
 #include <unistd.h>
 #include <utility>
@@ -42,7 +43,7 @@ Connector::~Connector() {
     close(mSock);
 }
 
-void Connector::Send(const std::string &aData) {
+void Connector::Send(const std::string &aData) const {
 
     int sendDataCount = write(mSock, aData.c_str(), aData.length());
     if (sendDataCount < 0) {
@@ -50,7 +51,7 @@ void Connector::Send(const std::string &aData) {
     }
 }
 
-string Connector::Receive() {
+string Connector::Receive() const {
     char recvBuffer[kRecvBuffMaxSize] {};
 
     int receivedDataCount = read(mSock, recvBuffer, kRecvBuffMaxSize);

@@ -40,7 +40,7 @@ public:
      * @param aData data which will be send.
      * @throws ConnectorException if can't send data.
      */
-    void Send(const std::string &aData);
+    void Send(const std::string &aData) const;
 
     /**
      * Receive data.
@@ -48,7 +48,7 @@ public:
      *
      * @throws ConnectorException if can't receive data.
      */
-    std::string Receive();
+    std::string Receive() const;
 
 private:
     static constexpr int kRecvBuffMaxSize = 1024;
