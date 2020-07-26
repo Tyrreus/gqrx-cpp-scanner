@@ -2,21 +2,30 @@
 
 #include "Connector.h"
 #include "ConnectorException.h"
+#include "GqrxManager.h"
+#include "GqrxManagerException.h"
+
+#include <string>
 
 using std::cout;
 using std::endl;
+
+using std::string;
 
 int main() {
 
     try {
         Connector connector("127.0.0.1", 7356);
+        GqrxManager gqrxManager(connector);
 
-        connector.Send("F 172000000\n");
-        cout << "Received: " << connector.Receive() << endl;
-
+        gqrxManager.SetFrequency(170000000);
+        cout << "Curr freq: " << gqrxManager.GetFrequency() << endl;
 
     } catch(ConnectorException &connectorException) {
-        cout << connectorException.what() << endl;
+        cout << "Connection exception: " << connectorException.what() << endl;
+    } catch(GqrxManagerException &gqrxManagerException) {
+        cout << "GQRX manager exception: " << gqrxManagerException.what() << endl;
     }
+
     return 0;
 }

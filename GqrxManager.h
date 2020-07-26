@@ -18,7 +18,7 @@ public:
     enum class DemodulatorMode_t {
         kOff,
         kRaw,
-        lAm,
+        kAm,
         kFm,
         kWfm,
         kWfmSt,
@@ -28,6 +28,11 @@ public:
         kCw,
         kCwl,
         kCwu
+    };
+
+    struct DemodulatorParam_t {
+        DemodulatorMode_t mMode;
+        freq_t mFilterWidth;
     };
 
     /**
@@ -45,7 +50,7 @@ public:
     /**
      * Set specific frequency.
      *
-     * @param aFreq frequency in HZ.
+     * @param aFreq frequency in [hz].
      * @throws GqrxManagerException if error.
      */
     void SetFrequency(freq_t aFreqHz) const;
@@ -53,7 +58,7 @@ public:
     /**
      * Get current frequency.
      *
-     * @return current frequency.
+     * @return current frequency in [hz].
      * @throws GqrxManagerException if error.
      */
     freq_t GetFrequency() const;
@@ -64,7 +69,7 @@ public:
      * @param aDemodulatorMode mode for demodulator.
      * @throws GqrxManagerException if error.
      */
-    void SetDemodulatorMode(DemodulatorMode_t aDemodulatorMode) const;
+    void SetDemodulatorMode(const DemodulatorParam_t aDemodulatorParam) const;
 
     /**
      * Get demodulator mode.
@@ -72,7 +77,7 @@ public:
      * @return current demodulator mode.
      * @throws GqrxManagerException if error.
      */
-    DemodulatorMode_t GetDemodulatorMode() const;
+    DemodulatorParam_t GetDemodulatorMode() const;
 
     /**
      * Get signal strength.
@@ -80,7 +85,7 @@ public:
      * @return signal strength in dBFS units.
      * @throws GqrxManagerException if error.
      */
-    int GetSignalStrength() const;
+    float GetSignalStrength() const;
 
     /**
      * Set squelch threshold.
@@ -88,7 +93,7 @@ public:
      * @param aSquelch threshold in dBFS units.
      * @throws GqrxManagerException if error.
      */
-    void SetSquelch(int aSquelch) const;
+    void SetSquelch(float aSquelch) const;
 
     /**
      * Get squelch threshold.
@@ -96,7 +101,7 @@ public:
      * @return current squelch threshold.
      * @throws GqrxManagerException if error.
      */
-    int GetSquelch() const;
+    float GetSquelch() const;
 
     /**
      * Set record state.
@@ -113,12 +118,6 @@ public:
      * @throws GqrxManagerException if error.
      */
     bool GetRecord() const;
-
-    /**
-     * Tell GQRX to close current connection.
-     * @throws GqrxManagerException if error.
-     */
-    void CloseRemoteConnection() const;
 
 private:
     const Connector &mConnector;

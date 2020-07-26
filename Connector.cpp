@@ -39,12 +39,15 @@ Connector::Connector(string aHostIp, int aPort) : mHostIp(move(aHostIp)), mPort(
     }
 }
 
+#include <iostream>
+
 Connector::~Connector() {
+    std::cout << "Closing connection!" << std::endl;
     close(mSock);
 }
 
 void Connector::Send(const std::string &aData) const {
-
+    std::cout << "Sending data: " << aData;
     int sendDataCount = write(mSock, aData.c_str(), aData.length());
     if (sendDataCount < 0) {
         throw ConnectorException("Error writing to socket");
@@ -59,6 +62,7 @@ string Connector::Receive() const {
         throw ConnectorException("Error reading from socket");
     }
     recvBuffer[receivedDataCount] = 0;
+    std::cout << "Received data: " << recvBuffer;
 
-    return string(recvBuffer);
+    return recvBuffer;
 }
